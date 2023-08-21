@@ -1,67 +1,53 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatefulWidget {
-  const MainApp({super.key});
-
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
   @override
-  State<MainApp> createState() => _MainAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
-class _MainAppState extends State<MainApp> {
+class _MyAppState extends State<MyApp> {
+  containerBuild(
+      {Color bgColor = Colors.yellowAccent,
+      double w = 50,
+      double h = 50,
+      double radius = 0}) {
+    return Container(
+      margin: const EdgeInsets.all(5),
+      width: w,
+      height: h,
+      decoration: BoxDecoration(
+          color: bgColor, borderRadius: BorderRadius.circular(radius)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "MaterialApp",
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          brightness: Brightness.light, // Define o tema como dark
-          primaryColor: Colors.blue, //cor primaria do APP
-          fontFamily: 'Roboto', // Fonte padrão do aplicativo
-          appBarTheme: const AppBarTheme(color: Colors.deepPurple),
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("AppBar"),
-            actions: const [Icon(Icons.exit_to_app), Icon(Icons.edit_note)],
-          ),
-          body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    width: 100,
-                    height: 50,
-                    color: Colors.yellow,
-                    margin: const EdgeInsets.all(5)),
-                Container(
-                    width: 200,
-                    height: 50,
-                    color: Colors.red,
-                    margin: const EdgeInsets.all(5)),
-                Container(
-                    width: 300,
-                    height: 50,
-                    color: Colors.green,
-                    margin: const EdgeInsets.all(5)),
-                Container(
-                    width: 400,
-                    height: 50,
-                    color: Colors.blue,
-                    margin: const EdgeInsets.all(5)),
-              ]),
-          drawer: const Drawer(),
-          bottomNavigationBar: BottomNavigationBar(items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Perfil"),
-          ]),
-          floatingActionButton: const FloatingActionButton(
-            onPressed: null,
-            child: Icon(Icons.add),
-          ),
-        ));
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+          appBar: AppBar(title: const Text("App Bar")),
+          body: Center(
+            child: Container(
+              color: Colors.black,
+              width: 250,
+              height: 250,
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                children: [
+                  containerBuild(),
+                  containerBuild(),
+                  containerBuild(),
+                  containerBuild(),
+                  containerBuild(),
+                ],
+              ),
+            ),
+          )),
+    );
   }
 }
